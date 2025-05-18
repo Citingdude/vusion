@@ -1,11 +1,37 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import VuButton from '@/components/button/VuButton.vue'
+
+const label = ref<string>('Read more')
 </script>
 
 <template>
-  <div class="min-h-screen">
-    <VuButton
-      label="Read more"
-    />
+  <div class="min-h-screen flex flex-col gap-8">
+    <div class="max-w-fit">
+      <label
+        for="label"
+        class="block mb-2 text-sm font-medium text-neutral-900 dark:text-white"
+      >
+        Label
+      </label>
+      <input
+        id="label"
+        v-model="label"
+        type="text"
+        class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-sm rounded-lg
+        block w-full p-2.5
+        dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white
+        focus-visible:outline-2
+    focus-visible:outline-black dark:focus-visible:outline-white"
+        placeholder="Set label"
+        required
+      >
+    </div>
+
+    <div>
+      <VuButton
+        :label="label"
+      />
+    </div>
   </div>
 </template>
