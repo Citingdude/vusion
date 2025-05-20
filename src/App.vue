@@ -1,10 +1,21 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import SunMoonIcon from '@/components/icon/SunMoonIcon.vue'
+import { useTheme } from '@/composables/useTheme'
+
+const { theme, toggleTheme } = useTheme()
 </script>
 
 <template>
-  <div class="antialiased bg-neutral-50 dark:bg-neutral-900">
-    <nav class="bg-white border-b border-neutral-200 px-4 py-2.5 dark:bg-neutral-800 dark:border-neutral-700 fixed left-0 right-0 top-0 z-50">
+  <div
+    class="antialiased bg-neutral-50 dark:bg-neutral-900"
+    :class="{ dark: theme === 'dark' }"
+  >
+    <nav
+      class="flex bg-white border-b border-neutral-200 px-4 py-2.5
+    dark:bg-neutral-800 dark:border-neutral-700
+    fixed left-0 right-0 top-0 z-50 justify-between"
+    >
       <div class="flex flex-wrap justify-between items-center">
         <div class="flex justify-start items-center">
           <button
@@ -50,6 +61,17 @@ import { RouterView } from 'vue-router'
           </RouterLink>
         </div>
       </div>
+
+      <button
+        class="group dark:hover:bg-neutral-900 hover:bg-neutral-100
+        transition-all duration-400 p-1  rounded-sm"
+        @click="toggleTheme"
+      >
+        <SunMoonIcon
+          class="size-8 text-black dark:text-white
+          "
+        />
+      </button>
     </nav>
 
     <!-- Sidebar -->
