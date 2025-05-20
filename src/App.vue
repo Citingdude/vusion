@@ -64,12 +64,11 @@ const { theme, toggleTheme } = useTheme()
 
       <button
         class="group dark:hover:bg-neutral-900 hover:bg-neutral-100
-        transition-all duration-400 p-1  rounded-sm"
+        transition-all duration-200 p-1 rounded-sm "
         @click="toggleTheme"
       >
         <SunMoonIcon
-          class="size-8 text-black dark:text-white
-          "
+          class="size-8 text-black dark:text-white group-active:scale-90 transition duration-400"
         />
       </button>
     </nav>
