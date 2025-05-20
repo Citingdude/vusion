@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import VuButton from '@/components/button/VuButton.vue'
+import VuButtonLink from '@/components/button/VuButtonLink.vue'
 import ArrowUpRightIcon from '@/components/icon/ArrowUpRightIcon.vue'
 
 const label = ref<string>('Read more')
@@ -70,17 +71,26 @@ const isPending = ref<boolean>(false)
       </div>
     </div>
 
-    <div>
+    <div class="flex flex-col gap-8">
       <VuButton
         :label="label"
         :is-disabled="isDisabled"
         :is-pending="isPending"
-        tag="button"
       >
         <template #trailingIcon>
           <ArrowUpRightIcon class="size-4" />
         </template>
       </VuButton>
+
+      <VuButtonLink
+        to="/"
+        :label="label"
+        :is-disabled="isDisabled"
+      >
+        <template #trailingIcon>
+          <ArrowUpRightIcon class="size-4" />
+        </template>
+      </VuButtonLink>
     </div>
   </div>
 </template>

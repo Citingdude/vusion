@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import { buttonStyle } from '@/components/button/VuButton.style'
-import CircleLoaderIcon from '@/components/icon/CircleLoaderIcon.vue'
 
 const props = defineProps<{
+  to: string
   label: string
-  type?: 'button' | 'reset' | 'submit'
   isDisabled?: boolean
-  isPending?: boolean
 }>()
 
 const buttonClass = computed(() => {
@@ -18,30 +17,17 @@ const buttonClass = computed(() => {
 </script>
 
 <template>
-  <button
-    :type="props.type"
+  <RouterLink
+    :to="props.to"
     :class="buttonClass.base()"
     :disabled="props.isDisabled"
   >
-    <div
-      v-if="props.isPending"
-      key="loader"
-      class="size-4 flex items-center justify-center"
-    >
-      <CircleLoaderIcon
-        aria-hidden="true"
-        class="size-4 animate-spin"
-      />
-    </div>
-
-    <template v-if="!props.isPending">
-      <slot name="leadingIcon" />
-    </template>
+    <slot name="leadingIcon" />
 
     <span :class="buttonClass.label()">
       {{ props.label }}
     </span>
 
     <slot name="trailingIcon" />
-  </button>
+  </RouterLink>
 </template>
