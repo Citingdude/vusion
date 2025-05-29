@@ -10,6 +10,7 @@ export const buttonStyle = tv({
       hover:shadow-black active:scale-95 
       dark:bg-white dark:text-black w-fit dark:hover:bg-neutral-200
       transition duration-100 ease-in-out
+      select-none
     `,
     label: 'max-w-xs overflow-ellipsis overflow-hidden text-nowrap',
   },
