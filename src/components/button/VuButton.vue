@@ -19,26 +19,41 @@ const buttonClass = computed(() => {
 
 <template>
   <button
+    class="relative"
     :type="props.type"
     :class="buttonClass.base()"
     :disabled="props.isDisabled"
   >
-    <div
-      v-if="props.isPending"
-      key="loader"
-      class="size-4 flex items-center justify-center"
+    <Transition
+      enter-from-class="opacity-0 scale-50"
+      leave-to-class="opacity-0 scale-50"
+      enter-active-class="transition ease-in-out duration-200"
+      leave-active-class="transition ease-in-out duration-100"
     >
-      <CircleLoaderIcon
-        aria-hidden="true"
-        class="size-4 animate-spin"
-      />
-    </div>
+      <div
+        v-if="props.isPending"
+        key="loader"
+        class="absolute size-4 flex items-center justify-center left-0
+        translate-x-3"
+      >
+        <CircleLoaderIcon
+          aria-hidden="true"
+          class="size-4 animate-spin"
+        />
+      </div>
+    </Transition>
 
     <template v-if="!props.isPending">
       <slot name="leadingIcon" />
     </template>
 
-    <span :class="buttonClass.label()">
+    <span
+      class="transition-[padding] duration-200 ease-in-out"
+      :class="[
+        buttonClass.label(),
+        { 'pl-4': props.isPending },
+      ]"
+    >
       {{ props.label }}
     </span>
 
