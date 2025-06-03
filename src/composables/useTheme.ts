@@ -1,5 +1,5 @@
 import { onBeforeMount, ref } from 'vue'
-import { getCookie, setCookie } from '@/utils/cookie.util'
+import { getLocalStorage, setLocalStorage } from '@/utils/localeStorage.util'
 
 type Theme = 'dark' | 'light'
 
@@ -14,11 +14,11 @@ export function useTheme() {
 
   function setTheme(newTheme: Theme) {
     theme.value = newTheme
-    setCookie('theme', newTheme)
+    setLocalStorage('theme', newTheme)
   }
 
   onBeforeMount(() => {
-    const savedTheme = getCookie('theme')
+    const savedTheme = getLocalStorage('theme')
     if (savedTheme === 'dark' || savedTheme === 'light') {
       theme.value = savedTheme
     }
