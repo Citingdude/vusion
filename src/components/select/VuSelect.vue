@@ -121,7 +121,8 @@ onBeforeUnmount(() => {
       class="w-full bg-white dark:bg-neutral-800 border
       border-neutral-300 dark:border-neutral-600 rounded-sm px-4 py-2
       text-left cursor-pointer flex justify-between items-center
-      focus:outline outline-black dark:text-neutral-100"
+      focus:outline outline-black dark:outline-white
+      dark:text-neutral-100"
       aria-haspopup="listbox"
       @click="toggle"
       @keydown.down.prevent="highlightNext"
@@ -141,37 +142,44 @@ onBeforeUnmount(() => {
     </button>
 
     <!-- Dropdown -->
-    <ul
-      v-if="isOpen"
-      class="absolute z-10 mt-1 w-full bg-white dark:bg-neutral-800 border
+    <Transition
+      enter-from-class="opacity-0 translate-y-2"
+      enter-active-class="transition duration-200 ease-out"
+      leave-to-class="opacity-0 translate-y-2"
+      leave-active-class="transition duration-150 ease-in"
+    >
+      <ul
+        v-if="isOpen"
+        class="absolute z-10 mt-1 w-full bg-white dark:bg-neutral-800 border
       border-neutral-300 dark:border-neutral-600 rounded shadow-lg max-h-60
       overflow-auto focus:outline-none dark:text-neutral-100"
-      role="listbox"
-    >
-      <li
-        v-for="(option, index) in options"
-        :key="option.value"
-        class="px-4 py-2 cursor-pointer flex items-center gap-2"
-        :class="[
-          highlightedIndex === index
-            ? 'bg-neutral-100 dark:bg-neutral-700'
-            : 'hover:bg-neutral-50 dark:hover:bg-neutral-700',
-          option.value === modelValue
-            ? 'font-semibold text-black dark:text-neutral-100'
-            : '',
-        ]"
-        role="option"
-        :aria-selected="option.value === modelValue"
-        @click="select(option)"
-        @mouseenter="highlightedIndex = index"
+        role="listbox"
       >
-        <CheckIcon v-show="option.value === modelValue" class="size-3" />
+        <li
+          v-for="(option, index) in options"
+          :key="option.value"
+          class="px-4 py-2 cursor-pointer flex items-center gap-2"
+          :class="[
+            highlightedIndex === index
+              ? 'bg-neutral-100 dark:bg-neutral-700'
+              : 'hover:bg-neutral-50 dark:hover:bg-neutral-700',
+            option.value === modelValue
+              ? 'font-semibold text-black dark:text-neutral-100'
+              : '',
+          ]"
+          role="option"
+          :aria-selected="option.value === modelValue"
+          @click="select(option)"
+          @mouseenter="highlightedIndex = index"
+        >
+          <CheckIcon v-show="option.value === modelValue" class="size-3" />
 
-        <span>
-          {{ option.label }}
+          <span>
+            {{ option.label }}
 
-        </span>
-      </li>
-    </ul>
+          </span>
+        </li>
+      </ul>
+    </Transition>
   </div>
 </template>
