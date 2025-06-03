@@ -41,8 +41,6 @@ const options = ref<SelectOption[]>([
       </div>
     </div>
 
-    {{ selectValue }}
-
     <div class="flex flex-col gap-8">
       <VuSelect
         id="checkbox"
