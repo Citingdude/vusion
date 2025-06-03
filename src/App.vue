@@ -102,6 +102,13 @@ const { theme, toggleTheme } = useTheme()
             >
               <span class="ml-3">Checkbox</span>
             </RouterLink>
+
+            <RouterLink
+              to="/components/select"
+              class="flex items-center p-2 text-base font-medium text-neutral-900 rounded-lg dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-700 group"
+            >
+              <span class="ml-3">Select</span>
+            </RouterLink>
           </li>
         </ul>
       </div>

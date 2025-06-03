@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ButtonView from '@/views/components/ButtonView.vue'
 import CheckboxView from '@/views/components/CheckboxView.vue'
+import SelectView from '@/views/components/SelectView.vue'
 import HomeView from '@/views/HomeView.vue'
 
 const router = createRouter({
@@ -24,6 +25,11 @@ const router = createRouter({
           path: 'checkbox',
           name: 'checkbox',
           component: CheckboxView,
+        },
+        {
+          path: 'select',
+          name: 'select',
+          component: SelectView,
         },
       ],
     },
