@@ -1,15 +1,29 @@
 <script setup lang="ts">
-import CheckIcon from '@/components/icon/CheckIcon.vue'
+import { computed, useTemplateRef } from 'vue'
 
 defineProps<{
   id: string
   label: string
 }>()
 
-defineEmits(['update:modelValue'])
+const model = defineModel<boolean>({ required: true })
 
-const model = defineModel<boolean>({
-  required: true,
+const pathRef = useTemplateRef('path')
+
+const dasharray = computed<number>(() => {
+  if (!pathRef.value) {
+    return 0
+  }
+
+  return pathRef.value.getTotalLength()
+})
+
+const dashoffset = computed<number>(() => {
+  if (model.value) {
+    return 0
+  }
+
+  return dasharray.value
 })
 </script>
 
@@ -22,28 +36,37 @@ const model = defineModel<boolean>({
       :id="id"
       v-model="model"
       type="checkbox"
-      :checked="model"
       class="peer sr-only"
       :aria-checked="model"
       role="checkbox"
     >
+
     <div
       class="size-5 flex items-center justify-center border rounded-sm
       transition-colors border-black dark:border-white"
     >
-      <Transition
-        enter-from-class="opacity-0 scale-50"
-        leave-to-class="opacity-0 scale-50"
-        enter-active-class="transition duration-200 ease-in-out"
-        leave-active-class="transition duration-200 ease-in-out"
+      <svg
+        viewBox="0 0 24 24"
+        class="text-black dark:text-white size-3"
       >
-        <CheckIcon
-          v-if="model"
-          class="text-black dark:text-white size-3"
-        />
-      </Transition>
 
+        <path
+          ref="path"
+          class="ease transition-[stroke-dashoffset] duration-200"
+          :style="{
+            strokeDasharray: dasharray,
+            strokeDashoffset: dashoffset,
+          }"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="3"
+          d="M20 6L9 17l-5-5"
+        />
+      </svg>
     </div>
+
     <span class="text-black dark:text-white">
       {{ label }}
     </span>
