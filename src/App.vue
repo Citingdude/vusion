@@ -2,7 +2,6 @@
 import { RouterView } from 'vue-router'
 import SunMoonIcon from '@/components/icon/SunMoonIcon.vue'
 import { useTheme } from '@/composables/useTheme'
-import DatepickerView from '@/views/components/DatepickerView.vue'
 
 const { theme, toggleTheme } = useTheme()
 </script>
@@ -116,6 +115,13 @@ const { theme, toggleTheme } = useTheme()
               class="flex items-center p-2 text-base font-medium text-neutral-900 rounded-lg dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-700 group"
             >
               <span class="ml-3">Datepicker</span>
+            </RouterLink>
+
+            <RouterLink
+              to="/components/dialog"
+              class="flex items-center p-2 text-base font-medium text-neutral-900 rounded-lg dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-700 group"
+            >
+              <span class="ml-3">Dialog</span>
             </RouterLink>
           </li>
         </ul>

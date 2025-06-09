@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import ButtonView from '@/views/components/ButtonView.vue'
 import CheckboxView from '@/views/components/CheckboxView.vue'
 import DatepickerView from '@/views/components/DatepickerView.vue'
+import DialogView from '@/views/components/DialogView.vue'
 import SelectView from '@/views/components/SelectView.vue'
 import HomeView from '@/views/HomeView.vue'
 
@@ -36,6 +37,11 @@ const router = createRouter({
           path: 'datepicker',
           name: 'datepicker',
           component: DatepickerView,
+        },
+        {
+          path: 'dialog',
+          name: 'dialog',
+          component: DialogView,
         },
       ],
     },
